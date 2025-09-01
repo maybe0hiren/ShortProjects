@@ -1,0 +1,49 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration
+local.properties
+*.iml
+
+# IntelliJ / Android Studio files
+.idea/
+.idea/*
+*.ipr
+*.iws
+
+# Keystore files
+*.jks
+*.keystore
+
+# Log files
+*.log
+
+# Android captures
+captures/
+
+# External native build
+.externalNativeBuild/
+
+# Gradle caches
+.gradle/
+.gradle/*
+
+# Generated files
+app/build/
+*/build/
+
+# NDK
+obj/
+
+# Google services (uncomment if using Firebase or Google services)
+# google-services.json
+
+# Misc
+.DS_Store
+Thumbs.db
