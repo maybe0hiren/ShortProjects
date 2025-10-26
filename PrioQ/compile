@@ -1,0 +1,3 @@
+echo "Compiling To-do list with Priority sorting..."
+gcc FODS.c -o app `pkg-config --cflags --libs gtk+-3.0`
+
