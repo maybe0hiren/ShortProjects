@@ -5,7 +5,6 @@
 #include <string>
 #include <limits>
 
-/* ───────────── ANSI Colors ───────────── */
 const std::string RESET  = "\033[0m";
 const std::string BOLD   = "\033[1m";
 const std::string DIM    = "\033[2m";
@@ -16,7 +15,6 @@ const std::string YELLOW = "\033[33m";
 const std::string BLUE   = "\033[34m";
 const std::string CYAN   = "\033[36m";
 
-/* ───────────── UI Helpers ───────────── */
 void printBanner() {
     std::cout << CYAN << BOLD;
     std::cout << "╭──────────────────────────────────────╮\n";
@@ -32,7 +30,6 @@ void separator() {
               << RESET << std::endl;
 }
 
-/* ───────────── Execute Shell Command ───────────── */
 std::string executeCommand(const std::string &command) {
     std::string result;
     constexpr size_t BUFFER_SIZE = 4096;
@@ -53,7 +50,6 @@ std::string executeCommand(const std::string &command) {
     return result;
 }
 
-/* ───────────── Trim Whitespace ───────────── */
 std::string trimWhitespace(const std::string& s) {
     const std::string whitespace = " \n\r\t";
     size_t start = s.find_first_not_of(whitespace);
@@ -63,11 +59,14 @@ std::string trimWhitespace(const std::string& s) {
     return s.substr(start, end - start + 1);
 }
 
-/* ───────────── Main ───────────── */
-int main() {
-    executeCommand("clear");
+bool repoExists(const std::string& repoLink) {
+    std::string cmd =
+        "git ls-remote " + repoLink + " > /dev/null 2>&1";
+    return system(cmd.c_str()) == 0;
+}
 
-    std::string key = "ASKDHAKSHDJKAHJSDH";
+int main() {
+    std::string key = "ASDFGHJKL";
     std::string repoLink;
     std::string question;
 
@@ -76,6 +75,11 @@ int main() {
     std::cout << BOLD << "Repository URL" << RESET << ": ";
     std::cin >> repoLink;
 
+    if (!repoExists(repoLink)) {
+        std::cout << RED << "Error: Repository does not exist or is inaccessible\n"
+                << RESET;
+        return 0;
+    }
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     separator();
